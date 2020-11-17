@@ -33,8 +33,6 @@ public:
     //int Amount();   //计算链表节点的数目
     void Remove(DataType x);     //查找某节点并删除
     //void RemoveAll(DataType x);
-    void RadixSort(int x);
-    //void Initiate();
 public:
     LinkNode* head;     //指向头节点
     LinkNode* tail;        //指向尾节点
