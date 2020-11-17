@@ -1,4 +1,5 @@
 #include<iostream>
+#include <cmath>
 using namespace std;
 #include<assert.h>
 #include"slist.h"
@@ -174,6 +175,7 @@ void SList::Remove(DataType x)      //查找某节点并删除
 	}
 }
 
+
 void SList::PrintSList()
 {
 	//头结点为空时，无需打印链表
@@ -204,4 +206,126 @@ void SList::Clear()         //链表置空
 	}
 	head = nullptr;
 	tail = nullptr;
+}
+
+int GetNum(LinkNode* pos, int x)
+{
+	int num = pos->data;
+	int tmp = pow(10, x - 1);
+	num = num / tmp;
+	num = num % 10;
+	return num;
+}
+
+void Initiate(LinkNode** head)
+{
+	(*head) = (LinkNode*)malloc(sizeof(LinkNode));
+	(*head)->next = nullptr;
+}
+
+void insert(LinkNode* head, LinkNode* node)
+{
+	if (head == nullptr) return;
+	else
+	{
+		LinkNode* p;
+		p = head;
+		while (p->next != nullptr)
+		{
+			p = p->next;
+		}
+		p->next = node;
+		node->next = nullptr;
+	}
+
+}
+
+
+void SList::RadixSort(int x)//桶排序
+{
+	LinkNode* p[10];
+	LinkNode* q;
+	int i, j, k,l;
+
+	for (j = 1; j <= x; j++)
+	{
+		for (i = 0; i < 10; i++)
+		{
+			
+			Initiate(&p[i]);
+		}
+		while (head != nullptr)
+		{
+			q = head;
+			k = GetNum(q, j);
+			insert(p[k], q);
+			q = q->next;
+		}
+	}
+	//Clear();
+	for (l = 0; l < 10; l++)
+	{
+		while (p[l]->next != nullptr)
+		{
+			PushBack(p[l]->next->data);
+			p[l] = p[l]->next;
+		}
+	}
+}
+
+void SList::Merge(SList& s)    //合并（针对有序链表）,合并后依然有序
+{
+	//  1. _head为空
+	//  2. 链表s为空
+	if (head == NULL)
+	{
+		head = s.head;
+		tail = s.tail;
+	}
+	if (s.head == NULL)
+	{
+		return;
+	}
+	//  3. 两个链表都不为空
+	LinkNode* phead = head;
+	if (phead->data <= s.head->data)
+	{
+		phead = phead->next;
+	}
+	else
+	{
+		head = s.head;
+		s.head = s.head->next;
+	}
+	LinkNode* cur = head;
+	while (1)
+	{
+		if (phead->data <= s.head->data)
+		{
+			head->next = phead;
+			head = head->next;
+			if (phead == tail)
+			{
+				head->next = s.head;
+				tail = s.tail;
+				tail->next = cur;
+				break;
+			}
+			phead = phead->next;
+		}
+		else
+		{
+			head->next = s.head;
+			head = head->next;
+			if (s.head == s.tail)
+			{
+				head->next = phead;
+				tail->next = cur;
+				break;
+			}
+			s.head = s.head->next;
+		}
+
+	}
+	head = cur;
 }

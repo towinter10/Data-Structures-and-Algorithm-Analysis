@@ -17,7 +17,7 @@ public:
 
 public:
 	//void Unipe();//去重
-	//void Merge(SList& s);//合并
+	void Merge(SList& s);//合并
     //void Sort();       //冒泡
     //void Reverse();   //翻转
     //void Swap(SList& s);      //交换
@@ -33,7 +33,9 @@ public:
     //int Amount();   //计算链表节点的数目
     void Remove(DataType x);     //查找某节点并删除
     //void RemoveAll(DataType x);
-private:
+    void RadixSort(int x);
+    //void Initiate();
+public:
     LinkNode* head;     //指向头节点
     LinkNode* tail;        //指向尾节点
 };

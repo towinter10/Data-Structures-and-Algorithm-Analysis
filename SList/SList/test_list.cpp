@@ -1,5 +1,7 @@
 #include"slist.h"
 #include<stdlib.h>
+#include<iostream>
+using namespace std;
 
 void Test2()
 {
@@ -19,9 +21,10 @@ void Test2()
     list2.PushBack(3);
     list2.PushBack(4);
     list2.PushBack(2);
-    list2.PushFront(2);
+    //list2.PushFront(2);
+    cout << list2.head->next << endl;
     list2.PrintSList();
-    //list2.Reverse();
+    list2.RadixSort(1);
     list2.PrintSList();
 
 }
