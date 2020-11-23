@@ -20,7 +20,7 @@ private:
 	size_t Capacity;
 	size_t Front;
 	size_t Rear;
-	//size_t Size;
+	size_t Size;
 };
 
 

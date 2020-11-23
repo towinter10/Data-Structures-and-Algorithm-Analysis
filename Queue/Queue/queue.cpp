@@ -6,6 +6,7 @@ template <typename T>
 Queue<T>::Queue(int num)
 	:Front(0)
 	, Rear(0)
+	£¬Size(0)
 {
 	Capacity = num + 1;
 	Arr = new T[Capacity];
@@ -17,6 +18,7 @@ Queue<T>::Queue(const Queue<T>& q)
 	Front = q.Front;
 	Rear = q.Rear;
 	Capacity = q.Capacity;
+	Size = q.Size;
 	Arr = new T[Capacity];
 	for (int i = 0; i <= Capacity; i++)
 	{
@@ -42,6 +44,7 @@ void Queue<T>::Enqueue(const T& q)
 	{
 		Arr[Rear] = q;
 		Rear = (Rear + 1) % Capacity;
+		Size = Size + 1;
 	}
 }
 
@@ -55,6 +58,7 @@ void Queue<T>::Dequeue()
 	else
 	{
 		Front = (Front + 1) % Capacity;
+		Size = Size - 1;
 	}
 }
 
