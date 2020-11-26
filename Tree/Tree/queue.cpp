@@ -5,8 +5,8 @@ using namespace std;
 template <typename T>
 Queue<T>::Queue(int num)
 	:Front(0)
-	,Rear(0)
-	,Size(0)
+	, Rear(0)
+	, Size(0)
 {
 	Capacity = num + 1;
 	Arr = new T[Capacity];
@@ -106,6 +106,12 @@ void Queue<T>::PrintQueue()
 	}
 }
 
+template <typename T>
+T Queue<T>::Frist()
+{
+	return Arr[Front];
+}
+
 void test1()
 {
 	Queue<int>	q1(5);
@@ -116,8 +122,10 @@ void test1()
 	q1.Enqueue(4);
 	q1.Enqueue(5);
 	q1.PrintQueue();
+	cout<<q1.Frist()<<endl;
 	cout<<q1.Full()<<endl;
 	q1.Dequeue();
+	cout << q1.Frist() << endl;
 	cout << q1.Full() << endl;
 	q1.PrintQueue();
 	q1.Enqueue(6);

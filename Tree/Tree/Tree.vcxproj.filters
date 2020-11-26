@@ -18,9 +18,15 @@
     <ClInclude Include="tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="queue.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

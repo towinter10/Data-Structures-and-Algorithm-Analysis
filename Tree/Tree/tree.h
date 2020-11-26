@@ -24,6 +24,9 @@ struct Tree
 */
 //二叉树
 //节点定义
+#include<vector>
+#include"queue.h"
+using namespace std;
 template<typename T>
 struct BiNode
 {
@@ -44,6 +47,7 @@ public:
 public:
 	void CreatBiTree(const T& Data);
 	void Clear(BiNode<T>* n);
+	void LevOrder();
 	void PreOrder(vector<T>& arr);
 	void InOrder(vector<T>& arr);
 	void PostOrder(vector<T>& arr);
@@ -52,8 +56,6 @@ private:
 	BiNode<T>* Root;
 
 };
-
-
 
 #endif // !_TREE_H
 

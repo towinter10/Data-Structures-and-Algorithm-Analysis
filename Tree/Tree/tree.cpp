@@ -1,5 +1,5 @@
 #include<iostream>
-#include<vector>
+
 #include"tree.h"
 using namespace std;
 
@@ -39,17 +39,63 @@ void BiTree<T>::CreatBiTree(const T& Data)
 	}
 	else
 	{
-		BiNode<T>* node = new BiNode(Data);
+		BiNode<T>* node = new BiNode<T>;
 		BiNode<T>* tmp = Root;
-		if (tmp->LChild == nullptr)
+		while (1)
 		{
-			node->Data = Data;
-			node->LChild = node->RChild = nullptr;
-			tmp->LChild = node;
+			if (Data < tmp->Data)
+			{
+				if (tmp->LChild == nullptr)
+				{
+					node->Data = Data;
+					node->LChild = node->RChild = nullptr;
+					tmp->LChild = node;
+					break;
+				}
+				else
+				{
+					tmp = tmp->LChild;
+				}
+			}
+			else
+			{
+				if (tmp->RChild == nullptr)
+				{
+					node->Data = Data;
+					node->LChild = node->RChild = nullptr;
+					tmp->RChild = node;
+					break;
+				}
+				else
+				{
+					tmp = tmp->RChild;
+				}
+			}
 		}
-		else
+
+		
+	
+	}
+}
+template<typename T>
+void BiTree<T>::LevOrder()
+{
+	Queue<T> q(1024);
+	if (Root != nullptr)
+	{
+		q.Enqueue(Root);
+	}
+	while (q.Empty() != true)
+	{
+		BiNode<T> node = q.Frist();
+		q.Dequeue();
+		if (node->LChild != nullptr)
 		{
-			//判断右节点是否为空，
+			q.Enqueue(node->LChild);
+		}
+		if (node->RChild != nullptr)
+		{
+			q.Enqueue(node->RChild);
 		}
 	}
 }
