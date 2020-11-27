@@ -77,6 +77,8 @@ void BiTree<T>::CreatBiTree(const T& Data)
 	
 	}
 }
+
+/*使用自建队列结构实现层次排序
 template<typename T>
 void BiTree<T>::LevOrder()
 {
@@ -98,4 +100,17 @@ void BiTree<T>::LevOrder()
 			q.Enqueue(node->RChild);
 		}
 	}
+}
+*/
+//使用C++库函数实现层次排序
+template<typename T>
+void BiTree<T>::LevOrder(vector<T>& arr)
+{
+
+}
+
+template<typename T>
+void BiTree<T>::PreOrder(vector<T>& arr)
+{
+
 }
