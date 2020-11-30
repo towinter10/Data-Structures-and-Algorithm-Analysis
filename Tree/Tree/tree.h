@@ -27,6 +27,7 @@ struct Tree
 #include<vector>
 //#include"queue.h"
 #include<queue>
+#include<stack>
 using namespace std;
 template<typename T>
 struct BiNode
@@ -43,15 +44,15 @@ class BiTree
 public:
 	BiTree();
 	BiTree(const T& Data);
-	BiTree(const BiTree<T>& t);
+	//BiTree(const BiTree<T>& t);
 	~BiTree();
 public:
-	void CreatBiTree(const T& Data);
-	void Clear(BiNode<T>* n);
-	void LevOrder(vector<T>& arr);
-	void PreOrder(vector<T>& arr);
-	void InOrder(vector<T>& arr);
-	void PostOrder(vector<T>& arr);
+	void CreatBiTree(const T& Data);//创建二叉树
+	void Clear(BiNode<T>* n);//	清除
+	void LevOrder(vector<T>& arr);//层次遍历
+	void PreOrder(vector<T>& arr);//先序遍历
+	void InOrder(vector<T>& arr);//中序遍历
+	void PostOrder(vector<T>& arr);//后序遍历
 
 private:
 	BiNode<T>* Root;
