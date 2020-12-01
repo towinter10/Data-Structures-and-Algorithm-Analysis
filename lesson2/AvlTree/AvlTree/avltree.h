@@ -21,6 +21,15 @@ public:
 	~AvlTree();
 
 public:
+	int GetDepth(BiNode<T>* nood);
+	int GetBF(BiNode<T>* nood);
+	void AllBF(BiNode<T>* nood);
+	void BFTwo(BiNode<T>* nood, BiNode<T>* tmp);
+	void BFTwoParent(BiNode<T>* r,BiNode<T>* tmp, BiNode<T>* parent);
+	void LL(BiNode<T>* tmp);
+	void RR(BiNode<T>* tmp);
+	void LR(BiNode<T>* tmp);
+	void RL(BiNode<T>* tmp);
 	void Insert(const T& Data);
 	void Clear(BiNode<T>* n);
 
