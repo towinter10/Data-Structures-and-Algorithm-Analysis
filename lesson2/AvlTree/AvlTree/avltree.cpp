@@ -13,7 +13,11 @@ AvlTree<T>::AvlTree()
 template<typename T>
 AvlTree<T>::~AvlTree()
 {
-	Clear(root);
+	if (root)
+	{
+		Clear(root);
+		root = nullptr;
+	}
 }
 
 template<typename T>
@@ -25,7 +29,6 @@ void AvlTree<T>::Clear(BiNode<T>* n)
 		Clear(n->RChild);
 		delete n;
 	}
-
 }
 
 template<typename T>
@@ -112,27 +115,39 @@ BiNode<T>* AvlTree<T>::BFTwo(BiNode<T>* node)
 }
 
 template<typename T>
-void AvlTree<T>::BFTwoParent(BiNode<T>* r,BiNode<T>* tmp, BiNode<T>* parent)
+BiNode<T>* AvlTree<T>::BFTwoParent(BiNode<T>* r,BiNode<T>* tmp)
 {
-	if (r != nullptr)
+	BiNode<T>* parent = new BiNode<T>;
+	stack<BiNode<T>*> s;
+	s.push(r);
+	while (s.empty()!= true)
 	{
-		if (r->LChild != nullptr)
+		parent = s.top();
+		s.pop();
+		if (parent->LChild != nullptr)
 		{
-			if (r->LChild == tmp || r->RChild == tmp)
+			if (parent->LChild == tmp)
 			{
-				parent = tmp;
+				break;
+			}
+			else
+			{
+				s.push(parent->LChild);
 			}
 		}
-		if (r->RChild != nullptr)
+		if (parent->RChild != nullptr)
 		{
-			if (r->LChild == tmp || r->RChild == tmp)
+			if (parent->RChild == tmp)
 			{
-				parent = tmp;
+				break;
+			}
+			else
+			{
+				s.push(parent->RChild);
 			}
 		}
-		BFTwoParent(r->LChild, tmp, parent);
-		BFTwoParent(r->RChild, tmp, parent);
 	}
+	return parent;
 }
 
 template<typename T>
@@ -148,23 +163,65 @@ void AvlTree<T>::LL(BiNode<T>* tmp)
 	else
 	{
 		BiNode<T>* L = tmp->LChild;
-		BiNode<T>* P = new BiNode<T>;
-		AvlTree<T>::BFTwoParent(root, tmp, P);
+		BiNode<T>* P = BFTwoParent(root, tmp);
 		tmp->LChild = L->RChild;
 		L->RChild = tmp;
-		P->LChild = L;
+		if (P->LChild == tmp)
+		{
+			P->LChild = L;
+		}
+		else
+		{
+			P->RChild = L;
+		}
+
 
 	}
 }
 
-//template<typename T>
-//void AvlTree<T>::RR(BiNode<T>* tmp);
-//
-//template<typename T>
-//void AvlTree<T>::LR(BiNode<T>* tmp);
-//
-//template<typename T>
-//void AvlTree<T>::RL(BiNode<T>* tmp);
+template<typename T>
+void AvlTree<T>::RR(BiNode<T>* tmp)
+{
+	if (tmp == root)
+	{
+		BiNode<T>* R = tmp->RChild;
+		tmp->RChild = R->LChild;
+		R->LChild = tmp;
+		root = R;
+	}
+	else
+	{
+		BiNode<T>* R = tmp->RChild;
+		BiNode<T>* P = BFTwoParent(root, tmp);
+		tmp->RChild = R->LChild;
+		R->LChild = tmp;
+		if (P->LChild == tmp)
+		{
+			P->LChild = R;
+		}
+		else
+		{
+			P->RChild = R;
+		}
+
+	}
+}
+
+template<typename T>
+void AvlTree<T>::LR(BiNode<T>* tmp)
+{
+	BiNode<T>* L = tmp->LChild;
+	RR(L);
+	LL(tmp);
+}
+
+template<typename T>
+void AvlTree<T>::RL(BiNode<T>* tmp)
+{
+	BiNode<T>* R = tmp->RChild;
+	LL(R);
+	RR(tmp);
+}
 
 
 template<typename T>
@@ -190,6 +247,7 @@ void AvlTree<T>::Insert(const T& Data)
 					node->Data = Data;
 					node->LChild = node->RChild = nullptr;
 					tmp->LChild = node;
+					node->bf = 0;
 					break;
 				}
 				else
@@ -204,6 +262,7 @@ void AvlTree<T>::Insert(const T& Data)
 					node->Data = Data;
 					node->LChild = node->RChild = nullptr;
 					tmp->RChild = node;
+					node->bf = 0;
 					break;
 				}
 				else
@@ -214,17 +273,34 @@ void AvlTree<T>::Insert(const T& Data)
 		}
 		AllBF(root);
 		BiNode<T>* nodet = BFTwo(root);
-		//BFTwo(root, nodet);
 		if (nodet->bf == 2)
 		{
-			LL(nodet);
+			if (Data < nodet->LChild->Data)
+			{
+				LL(nodet);
+			}
+			else
+			{
+				LR(nodet);
+			}
 		}
-
+		if (nodet->bf == -2)
+		{
+			if (Data > nodet->RChild->Data)
+			{
+				RR(nodet);
+			}
+			else
+			{
+				RL(nodet);
+			}
+		}
+		AllBF(root);
 	}
 }
 
 
-int main()
+void Test1()//LL
 {
 	AvlTree<int> t1;
 	t1.Insert(10);
@@ -236,10 +312,49 @@ int main()
 	t1.Insert(17);
 	t1.Insert(2);
 	t1.Insert(1);
-	return  0;
 }
 
-//AllBF(root);
-//BiNode<T>* nodet = new BiNode<T>;
-//BFTwo(root, nodet);
-//LL(nodet);
+void Test2()//RR
+{
+	AvlTree<int> t2;
+	t2.Insert(10);
+	t2.Insert(15);
+	t2.Insert(5);
+	t2.Insert(3);
+	t2.Insert(7);
+	t2.Insert(13);
+	t2.Insert(17);
+	t2.Insert(8);
+	t2.Insert(9);
+}
+
+void Test3()//RL
+{
+	AvlTree<int> t3;
+	t3.Insert(2);
+	t3.Insert(1);
+	t3.Insert(5);
+	t3.Insert(4);
+	t3.Insert(6);
+	t3.Insert(3);
+}
+
+void Test4()
+{
+	AvlTree<int> t4;
+	t4.Insert(2);
+	t4.Insert(1);
+	t4.Insert(0);
+	t4.Insert(3);
+	t4.Insert(4);
+	t4.Insert(5);
+	t4.Insert(6);
+	t4.Insert(9);
+	t4.Insert(8);
+	t4.Insert(7);
+}
+int main()
+{
+	Test4();
+	return 0;
+}

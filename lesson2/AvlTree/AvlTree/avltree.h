@@ -25,11 +25,11 @@ public:
 	int GetBF(BiNode<T>* nood);
 	void AllBF(BiNode<T>* nood);
 	BiNode<T>* BFTwo(BiNode<T>* nood);
-	void BFTwoParent(BiNode<T>* r,BiNode<T>* tmp, BiNode<T>* parent);
+	BiNode<T>* BFTwoParent(BiNode<T>* r,BiNode<T>* tmp);
 	void LL(BiNode<T>* tmp);
-	//void RR(BiNode<T>* tmp);
-	//void LR(BiNode<T>* tmp);
-	//void RL(BiNode<T>* tmp);
+	void RR(BiNode<T>* tmp);
+	void LR(BiNode<T>* tmp);
+	void RL(BiNode<T>* tmp);
 	void Insert(const T& Data);
 	void Clear(BiNode<T>* n);
 
