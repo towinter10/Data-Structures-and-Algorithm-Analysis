@@ -113,7 +113,6 @@ int main()
 	s1.Push(10);
 	s1.Push(12);
 	s1.Push(23);
-	s1.Push(34);
 	s1.Pop();
 	s1.PrintStack();
 	s1.Size();

@@ -18,7 +18,7 @@ public:
 	T GetTop();
 	void PrintStack();
 
-public:
+private:
 	T* Arr;
 	int Top;
 	int Capacity;
