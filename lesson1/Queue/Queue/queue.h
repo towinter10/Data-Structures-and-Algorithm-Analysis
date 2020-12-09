@@ -1,4 +1,5 @@
-#ifndef _QUEUE_H_
+#ifndef _QUEUE_H
+#define _QUEUE_H
 template <typename T>
 class Queue
 {
@@ -24,5 +25,5 @@ private:
 };
 
 
-#endif // !_QUEUE_H_
+#endif // !_QUEUE_H
 #pragma once
