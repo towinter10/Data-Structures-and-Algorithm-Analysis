@@ -1,4 +1,5 @@
 #ifndef _TREE_H
+#define _TREE_H
 /*Ë«Ç×º¢×Ó±íÊ¾
 template<typename T>
 struct ChildNode
