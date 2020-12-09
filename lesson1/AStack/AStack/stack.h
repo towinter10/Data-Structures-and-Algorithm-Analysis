@@ -1,5 +1,5 @@
 #ifndef _ASTACH_H
-
+#define _ASTACH_H
 template <typename T>
 class AStack
 {
