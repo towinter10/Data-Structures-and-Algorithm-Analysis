@@ -1,5 +1,6 @@
 //参考https://www.cnblogs.com/Lynn-Zhang/p/5396637.html
-#ifndef _List_h
+#ifndef _LIST_H
+#define _LIST_H
 typedef int DataType;
 
 struct  LinkNode//定义节点类
@@ -30,5 +31,5 @@ public:
     LinkNode* head;     //指向头节点
     LinkNode* tail;        //指向尾节点
 };
-#endif // !_List_h
+#endif // !_LIST_H
 
